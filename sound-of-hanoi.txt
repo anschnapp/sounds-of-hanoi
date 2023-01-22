@@ -1,0 +1,68 @@
+
+define :harnoi do |n, fromRod, toRod, auxRod|
+  print 'called'
+  if n == 1
+    playMove fromRod, toRod
+  else
+    harnoi n - 1, fromRod, auxRod, toRod
+    playMove fromRod, toRod
+    finishedIntermediateSound n - 1
+    harnoi n -1, auxRod, toRod, fromRod
+  end
+end
+
+define :playMove do |fromRod, toRod|
+  print 'from:', fromRod, ' ; to ', toRod
+  if fromRod == 1 && toRod == 2
+    oneToRightFromLeftSound
+  end
+  if fromRod == 1 && toRod == 3
+    twoToRightSound
+  end
+  if fromRod == 2 && toRod == 1
+    oneToLeftFromMiddleSound
+  end
+  if fromRod == 2 && toRod == 3
+    oneToRightFromMiddleSound
+  end
+  if fromRod == 3 && toRod == 1
+    twoToLeftSound
+  end
+  if fromRod == 3 && toRod == 2
+    oneToLeftFromMiddleSound
+  end
+end
+
+define :oneToLeftFromMiddleSound do
+  play 50, release: 0.1, amp: 1.15
+  sleep 0.1
+end
+define :oneToLeftFromRightSound do
+  play 50, release: 0.1, amp: 1.15
+  sleep 0.1
+end
+define :twoToLeftSound do
+  play 45, release: 0.1, amp: 1.3
+  sleep 0.1
+end
+define :oneToRightFromMiddleSound do
+  play 55, release: 0.1
+  sleep 0.1
+end
+define :oneToRightFromLeftSound do
+  play 55, release: 0.1
+  sleep 0.1
+end
+define :twoToRightSound do
+  play 60, release: 0.1
+  sleep 0.1
+end
+define :finishedIntermediateSound do |n|
+  with_fx :bitcrusher do
+    play 50, release: 0.3, amp: n / 3.5
+  end
+end
+
+
+
+harnoi 9, 1, 3, 2
