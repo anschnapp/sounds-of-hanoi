@@ -1,13 +1,13 @@
 
-define :harnoi do |n, fromRod, toRod, auxRod|
+define :hanoi do |n, fromRod, toRod, auxRod|
   print 'called'
   if n == 1
     playMove fromRod, toRod
   else
-    harnoi n - 1, fromRod, auxRod, toRod
+    hanoi n - 1, fromRod, auxRod, toRod
     playMove fromRod, toRod
-    finishedIntermediateSound n - 1
-    harnoi n -1, auxRod, toRod, fromRod
+    hanoi n - 1, auxRod, toRod, fromRod
+    finishedForNSound n
   end
 end
 
@@ -57,7 +57,9 @@ define :twoToRightSound do
   play 60, release: 0.1
   sleep 0.1
 end
-define :finishedIntermediateSound do |n|
+
+
+define :finishedForNSound do |n|
   with_fx :bitcrusher do
     play 50, release: 0.3, amp: n / 3.5
   end
@@ -65,4 +67,4 @@ end
 
 
 
-harnoi 9, 1, 3, 2
+hanoi 8, 1, 3, 2
