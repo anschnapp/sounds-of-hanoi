@@ -33,17 +33,19 @@ define :playlist do |list|
   end
 end
 
-
-# initialize a list of 400 items with sounds from 40 to 140 (so quite low and quite high)
-sound = 40
-list = []
-400.times do
-  list << sound
-  sound = sound + 0.25
+define :generateInitialShuffledList do
+  # initialize a list of 400 items with sounds from 40 to 140 (so quite low and quite high)
+  sound = 40
+  list = []
+  400.times do
+    list << sound
+    sound = sound + 0.25
+  end
+  return list.shuffle
 end
 
 
-shuffledList = list.shuffle
+shuffledList = generateInitialShuffledList
 
 print 'start playing initial shuffled list'
 playlist shuffledList
