@@ -1,7 +1,9 @@
 define :qsort do |list|
+  if list.empty?
+    return list
+  end
+  
   a = list.shift
-  
-  
   low = []
   high = []
   list.each do |element|
@@ -13,17 +15,10 @@ define :qsort do |list|
       high << element
     end
   end
-  if low.empty?
-    sortedLow = []
-  else
-    
-    sortedLow = qsort low
-  end
-  if high.empty?
-    sortedHigh = []
-  else
-    sortedHigh = qsort high
-  end
+  
+  sortedLow = qsort low
+  sortedHigh = qsort high
+  
   result = []
   result = sortedLow
   result << a
@@ -31,7 +26,15 @@ define :qsort do |list|
   return result
 end
 
+define :playlist do |list|
+  list.each do |element|
+    play element, release: 0.1
+    sleep 0.03
+  end
+end
 
+
+# initialize a list of 400 items with sounds from 40 to 140 (so quite low and quite high)
 sound = 40
 list = []
 400.times do
@@ -41,20 +44,19 @@ end
 
 
 shuffledList = list.shuffle
-##| index = 0
-##| 400.times do
-##|   play list[index], release: 0.1
-##|   sleep 0.03
-##|   index = index + 1
-##| end
 
+print 'start playing initial shuffled list'
+playlist shuffledList
+print 'finish playing initial shuffled list'
+sleep 2
+
+print 'start sorting and playing every touched number as a side effect'
 orderedList = qsort shuffledList
+print 'finsish sorting and playing every touched number as a side effect'
 
-##| index = 0
-##| 400.times do
-##|   play orderedList[index], release: 0.1
-##|   sleep 0.03
-##|   index = index + 1
-##| end
+sleep 2
+print 'start playing ordered list'
+playlist orderedList
+print 'finish playing ordered list'
 
 
