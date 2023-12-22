@@ -1,0 +1,16 @@
+sound = 40
+list = []
+400.times do
+  list << sound
+  sound = sound + 0.25
+end
+
+
+#list = list.shuffle
+index = 0
+400.times do
+  play list[index], release: 0.1
+  sleep 0.03
+  index = index + 1
+end
+
