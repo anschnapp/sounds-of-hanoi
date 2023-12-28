@@ -39,3 +39,13 @@ You could easily play around and change parameters. To maybe hear longer lists, 
 
 There is also a mp3 file available so you could hear it (without extra installing sonic pi just to for hearing)
 (of course this is only one recorded version of it, currently it's the one of tag version 1.0.0)
+
+### sounds of bubble sort
+The sound here represents all comparisons done while the bubble sort algorithm is executed (similar to the quicksort variant).
+
+Also here you would first hear the random list of tones. Then a 2 seconds delay. Then the actual sound of the algorithm. Again a 2 second delay and then the sorted list.
+The frequency bandwidth of tones is the same here as for quicksort (40 to 115).
+But this time only 100 items are used because this algorithm gets incredible slow if we fit it with 300 or 400 like we do in the quicksort example.
+You could hear that it's a smaller dataset in the list when you hear the random and or the sorted list, because the length of playing it is proportional to the items of the list.
+
+Also here i have put a sound file close to the source code. (just for getting an idea without the need of executing it on sonic pi)

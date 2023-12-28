@@ -7,40 +7,47 @@ define :playToneWithDelay do |tone|
   sleep 0.03
 end
 
-
-define :qsort do |list|
-  if list.empty?
-    return list
-  end
+define :bubbleSort do | list|
+  finished = false
+  elementBeforeInsideIteration = nil
   
-  a = list.shift
-  low = []
-  high = []
-  list.each do |element|
-    playToneWithoutDelay a
-    playToneWithDelay element
-    if element <= a
-      low << element
-    else
-      high << element
+  loop do
+    index = 0
+    swappedInsideIteration = false
+    size = list.size
+    size.times do
+      if index > 0
+        elementBefore = list[index - 1]
+        element = list[index]
+        if elementBefore > element
+          playToneWithoutDelay elementBefore
+          playToneWithDelay element
+          
+          list[index - 1] = element
+          list[index] = elementBefore
+          swappedInsideIteration = true
+        end
+      end
+      index = index + 1
     end
+    if !swappedInsideIteration
+      break
+    end
+    
+    
   end
-  
-  sortedLow = qsort low
-  sortedHigh = qsort high
-  
-  result = []
-  result = sortedLow
-  result << a
-  result = result + sortedHigh
-  return result
+  return list
 end
+
+
+
 
 define :playList do |list|
   list.each do |element|
     playToneWithDelay element
   end
 end
+
 
 define :generateShuffledList do |size|
   # sounds in the list will all be in the spectrum of 40 to 115 and equaly distributed
@@ -57,7 +64,7 @@ define :generateShuffledList do |size|
 end
 
 
-shuffledList = generateShuffledList 400
+shuffledList = generateShuffledList 100
 
 print 'start playing initial shuffled list'
 playList shuffledList
@@ -65,12 +72,13 @@ print 'finish playing initial shuffled list'
 sleep 2
 
 print 'start sorting and playing every touched number as a side effect'
-orderedList = qsort shuffledList
+orderedList = bubbleSort shuffledList
 print 'finsish sorting and playing every touched number as a side effect'
 
 sleep 2
 print 'start playing ordered list'
 playList orderedList
 print 'finish playing ordered list'
+
 
 
