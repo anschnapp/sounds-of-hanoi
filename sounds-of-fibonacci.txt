@@ -1,0 +1,51 @@
+define :convertNumberToTone do |n, maxNValue|
+  beginSound = 40.0
+  lastSound = 115.0
+  result = beginSound + n.to_f * ((lastSound - beginSound) / maxNValue)
+  print n
+  print maxNValue
+  print result
+  return result
+end
+
+define :playNumberWithoutDelay do |n, maxNValue|
+  tone = convertNumberToTone n, maxNValue
+  play tone, release: 0.1
+end
+
+define :playNumberWithDelay do |n, maxNValue|
+  playNumberWithoutDelay n, maxNValue
+  sleep 0.03
+end
+
+define :fibWithoutSound do |n|
+  fibInternal n, false, nil
+end
+
+define :fib do |n|
+  maxNValue = fibWithoutSound n
+  fibInternal n, true, maxNValue
+end
+
+
+
+define :fibInternal do |n, playsound, maxNValue|
+  if n == 1 || n == 2
+    if playsound
+      playNumberWithDelay n, maxNValue
+    end
+    return 1
+  else
+    fibNMinusOne = fibInternal (n - 1), playsound, maxNValue
+    fibNMinusTwo = fibInternal (n - 2), playsound, maxNValue
+    if playsound
+      playNumberWithoutDelay fibNMinusOne, maxNValue
+      playNumberWithDelay fibNMinusTwo, maxNValue
+    end
+    
+    return fibNMinusOne + fibNMinusTwo
+  end
+end
+
+fib(16)
+
