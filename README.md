@@ -49,3 +49,20 @@ But this time only 100 items are used because this algorithm gets incredible slo
 You could hear that it's a smaller dataset in the list when you hear the random and or the sorted list, because the length of playing it is proportional to the items of the list.
 
 Also here i have put a sound file close to the source code. (just for getting an idea without the need of executing it on sonic pi)
+
+### sounds of fibonacci
+Simple naive recursive algorithm for calculating the n'th fibonacci value.
+
+Technically the fibonacci is calculated two times, first to find the maximum number which has to be represented as a sound.
+It's used for converting numbers to representable tones.
+
+So, the second round is the one which plays sound for all calculated intermediate results.
+
+Most of the time fibonacci is working on the relatively low numbers, that's why the sound has only low frequencies until it's almost finished.
+
+There is also a fibonacci version with a simple caching included, this is of course much faster.
+But it sounded nearly the same (because even if we don't repeat the calculation of low fibonaccies thousand of times, all calculations are still very low numbers compared to the numbers in the "end rounds".
+(maybe in the future there will be a variant where we convert the numbers not linear but logarithmic, would be interesting)
+
+The none cache versions which you could hear as a downloadable mp3 calculates the fibonacci of 16.
+The cache variant calculated the fibonacci of 200 (which would kind of take forever without cache)
